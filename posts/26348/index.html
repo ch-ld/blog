@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="火柴" />
+
+
+
+<meta name="description" content="在日常的工作中，或多或少的会接触一些Linux系统，这里简单系统的讲解一下Linux命令。">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 命令基础">
+<meta property="og:url" content="https://blog.chen-hao.com.cn/posts/26348/index.html">
+<meta property="og:site_name" content="火柴的前端博客">
+<meta property="og:description" content="在日常的工作中，或多或少的会接触一些Linux系统，这里简单系统的讲解一下Linux命令。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T01:51:03.144Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux 命令基础">
+<meta name="twitter:description" content="在日常的工作中，或多或少的会接触一些Linux系统，这里简单系统的讲解一下Linux命令。">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="火柴的前端博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Linux 命令基础 | 火柴的前端博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">火柴</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">立志学前端的DevOps</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:18201620971@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/ch-ld/blog" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/curl/">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.chen-hao.com.cn/">我的运维博客</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">一个尝试学前端的小运维</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">火柴</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">火柴</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">立志学前端的DevOps</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:18201620971@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/ch-ld/blog" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Linux-命令基础" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/posts/26348/" class="article-date">
+      <time datetime="2018-03-29T01:07:01.000Z" itemprop="datePublished">2018-03-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux 命令基础
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <blockquote>
+<p>在日常的工作中，或多或少的会接触一些<code>Linux</code>系统，这里简单系统的讲解一下<code>Linux</code>命令。</p>
+</blockquote>
+<a id="more"></a>
+<p></p><h2>Linux的哲学思想</h2><p></p>
+<ol>
+<li><p>一切皆文件(把几乎所有资源都抽象为文件形式：硬件、通信接口等等) </p>
+</li>
+<li><p>由众多功能单一的程序组成</p>
+</li>
+<li><p>尽量避免与用户交互(易于以编程的方式实现自动化任务)</p>
+</li>
+<li><p>使用纯文本文件保持程序的配置信息</p>
+</li>
+</ol>
+<p></p><h2>常用命令</h2><p></p>
+<p></p><h3>cd</h3><br>change directory，切换目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd [/PATH/TO/SOMEDIR]</span><br><span class="line">    注意：bash中，~表示用户的家目录</span><br><span class="line">    cd ~:切换回家目录</span><br><span class="line">    cd ~USERNAME:切换至指定用户的家目录（管理员有效）</span><br><span class="line">    cd -:在上一次所在目录与当前目录之间来回切换</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h3>ls</h3><br>list,列出指定目录下的内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ls [OPTION]...[FILE]...</span><br><span class="line">    -a,-all:显示所有文件</span><br><span class="line">    -A,--almost-all：显示除.和..以外的所有文件</span><br><span class="line">    -l:显示为长格式</span><br><span class="line">    -h,--human-readable:对数值做单位换算</span><br><span class="line">    -d ：查看目录自身的属性</span><br><span class="line">    -R：recursive,递归显示文件</span><br><span class="line">    -r:reverse,降序显示</span><br><span class="line">    --color=&#123;never|auto|always&#125;: 着色显示</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h3>cat</h3><br>concatinate，连接并倾倒至输出设备<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat [OPTION]...[FILE]...</span><br><span class="line">    -n,--number:对显示出的行进行编号</span><br><span class="line">    -E,--show-ends:显示行结束符</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h3>echo</h3><br>回显命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo [SHORT-OPTION]...[STRING]...</span><br><span class="line">    -n:取消换行符翻自动添加功能</span><br><span class="line">    -e:启用转义符</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h3>mkdir</h3><br>make directory，创建目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir [OPTION]... DIRECTORY...</span><br><span class="line">    -p:按需创建父目录路径(递归创建)</span><br><span class="line">    -v：显示过程</span><br><span class="line">    -m,--mode=MODE :直接给定目录权限</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h3>mv</h3><br>移动文件或重命名文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mv -move(renames) files</span><br><span class="line">    mv [OPTION]... [-T] SOURCE DEST</span><br><span class="line">    mv [OPTION]... SOURCE... DIRECTORY</span><br><span class="line">    mv [OPTION]... -t DIRECTORY SOURCE...	</span><br><span class="line">        常用选项：</span><br><span class="line">            -i：交互式；</span><br><span class="line">            -f：force</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h3>touch</h3><br>修改文件的时间戳或创建空文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">touch [OPTION] files</span><br><span class="line">    -t STAMP:指明时间</span><br><span class="line">        [[CC]YY]MMDDhhmm[.ss]</span><br><span class="line">    -a :仅修改atime</span><br><span class="line">    -m :仅修改mtime</span><br><span class="line">    -c：不创建文件</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h3>rm</h3><br>删除文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rm -remove files or directory</span><br><span class="line">rm [OPTION]... FILE...</span><br><span class="line">    常用选项：</span><br><span class="line">        -i :交互</span><br><span class="line">        -f :--force</span><br><span class="line">        -r :递归删除目录及其内容</span><br><span class="line">删除目录：rm -rf /PATH/TO/DIR</span><br></pre></td></tr></table></figure><p></p>
+<p><em>注意：请不要执行“rm -rf /”或“rm -rf/*” ！！！ 谨慎使用</em>    </p>
+<p>那么命令太多，记不住怎么办呢？没关系，有下列几种方式供你选择。</p>
+<p></p><h2>如何了解一个陌生的命令</h2><p></p>
+<p></p><h3>使用帮助</h3><br>使用命令自带的简要格式的使用帮助<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COMMAND --help</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h3>使用手册(manual)</h3><p></p>
+<ul>
+<li>存储位置：/usr/share/man</li>
+<li>章节：man1,man2,man3,man4……<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#man KEYWORD(命令、关键字）</span><br><span class="line">    SECTION</span><br><span class="line">        NAME:命令名称及功能性描述</span><br><span class="line">        SYNOPSIS:命令使用格式摘要</span><br><span class="line">        DESCRIPTION：详细描述信息</span><br><span class="line">        OPTIONS:选项的详细说明</span><br><span class="line">        AUTHOR：作者信息</span><br><span class="line">        BUGS：报告程序BUG的途径</span><br><span class="line">        EXAMPLES：使用示例</span><br><span class="line">        SEE ALSO：额外参考</span><br><span class="line">        FILES：相关的配置文件</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p></p><h3>info 信息</h3><br>获取命令的在线文档<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">info COMMAND</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h3>文档</h3><br>很多应用程序会自带帮助文档:<code>/usr/share/doc/APPLICATION_NAME-VERSION</code><p></p>
+<ul>
+<li>README:程序的相关信息</li>
+<li>INSTALL:程序的安装帮助</li>
+<li>CHANGES：版本迭代的更新信息</li>
+</ul>
+<p></p><h3>搜索引擎</h3><br>能用<code>Google</code>的尽量用<code>Google</code>，能用必应的尽量用必应，退而求其次就只能用百度咯。<br>这里推荐一个查询命令的网站<code>https://explainshell.com/</code>，如果你不知道命令的含义，那么打开这个网站查询一下吧。<p></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/posts/26348/">Linux 命令基础</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">火柴</a></p>
+        <p><span>发布时间:</span>2018-03-29, 09:07:01</p>
+        <p><span>最后更新:</span>2018-03-29, 09:51:03</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/posts/26348/" title="Linux 命令基础">https://blog.chen-hao.com.cn/posts/26348/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://blog.chen-hao.com.cn/posts/26348/　　作者: 火柴" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/posts/4284/">
+                    curl命令使用和参数说明
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/posts/34883/">
+                    Hexo + Yelee 搭建个人博客
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">Linux的哲学思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.</span> <span class="toc-text">cd</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.2.</span> <span class="toc-text">ls</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.</span> <span class="toc-text">cat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.4.</span> <span class="toc-text">echo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.5.</span> <span class="toc-text">mkdir</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.6.</span> <span class="toc-text">mv</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.7.</span> <span class="toc-text">touch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.8.</span> <span class="toc-text">rm</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">如何了解一个陌生的命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">使用帮助</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">使用手册(manual)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.3.</span> <span class="toc-text">info 信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.4.</span> <span class="toc-text">文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.5.</span> <span class="toc-text">搜索引擎</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-6 i,
+        .toc-level-6 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"true"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Linux 命令基础　| 火柴的前端博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/posts/4284/" title="上一篇: curl命令使用和参数说明">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/posts/34883/" title="下一篇: Hexo + Yelee 搭建个人博客">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/posts/6067/">HTML常用标签和属性</a></li><li class="post-list-item"><a class="post-list-link" href="/posts/16357/">HTTP请求和响应报文</a></li><li class="post-list-item"><a class="post-list-link" href="/posts/4284/">curl命令使用和参数说明</a></li><li class="post-list-item"><a class="post-list-link" href="/posts/26348/">Linux 命令基础</a></li><li class="post-list-item"><a class="post-list-link" href="/posts/34883/">Hexo + Yelee 搭建个人博客</a></li><li class="post-list-item"><a class="post-list-link" href="/posts/42088/">git 使用入门</a></li></ul>
+
+
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2018 火柴
+            </div>
+            <div class="footer-right">
+                Hosted by <a href="https://pages.coding.me" target="_blank" title="快速、简洁且高效的博客框架">Coding Pages</a>  <i class="fa fa-heart animated infinite pulse"></i>
+				
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) 我藏好了哦~ " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
